@@ -265,7 +265,7 @@ ResourcePref resources[] = {
 		{ "cwscale",      FLOAT,   &cwscale },
 		{ "chscale",      FLOAT,   &chscale },
 		{ "cursorstyle",  INTEGER, &cursorstyle },			
-		{ "alpha",        FLOAT,   &alpha },};
+		{ "alpha",        FLOAT,   &alpha },
 };
 
 /*
