@@ -22,7 +22,7 @@ st.foreground:	  	#fdeffd
 st.background:	  	#0a060f
 
 ! vim select
-st.currentBg:	   	#000000
+st.currentBg:	   	#212529
 st.highlightFg:		#191c25
 st.highlightBg:		#cda869
 
