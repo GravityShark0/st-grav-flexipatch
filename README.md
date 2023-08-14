@@ -1,5 +1,5 @@
 # st-grav-flexipatch
-st-flexipatch by bakkeby with my patches selected
+st-flexipatch by bakkeby with my patches selected and some config fixes
 
 ## Patches
 - ALPHA
@@ -22,4 +22,4 @@ st-flexipatch by bakkeby with my patches selected
 - XRESOURCES
 - XRESOURCES_RELOAD
 
-Big thanks to [bakkeby](https://github.com/bakkeby/st-flexipatch)
+Thanks to [bakkeby](https://github.com/bakkeby/st-flexipatch)
