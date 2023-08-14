@@ -710,18 +710,8 @@ sigchld(int a)
 	if ((p = waitpid(pid, &stat, WNOHANG)) < 0)
 		die("waiting for pid %hd failed: %s\n", pid, strerror(errno));
 
-	if (pid != p) {
-		if (!extpipeactive)
-			return;
-
-		if (p == 0 && wait(&stat) < 0)
-			die("wait: %s\n", strerror(errno));
-
-		/* reinstall sigchld handler */
-		signal(SIGCHLD, sigchld);
-		extpipeactive = 0;
+	if (pid != p)
 		return;
-	}
 
 
 	if (WIFEXITED(stat) && WEXITSTATUS(stat))
