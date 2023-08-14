@@ -20,5 +20,6 @@ st-flexipatch by bakkeby with my patches selected and some config fixes
 - WIDE_GLYPHS
 - XRESOURCES
 - XRESOURCES_RELOAD
+> Some patches were selected not for need but it sounded cool. I could make another version with only essential patches but im lazy
 
-Thanks to [bakkeby](https://github.com/bakkeby/st-flexipatch)
+Thanks to [bakkeby](https://github.com/bakkeby/st-flexipatch) and to [suckless](https://st.suckless.org/)
