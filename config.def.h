@@ -259,12 +259,12 @@ ResourcePref resources[] = {
 		{ "bellvolume",   INTEGER, &bellvolume },
 		{ "tabspaces",    INTEGER, &tabspaces },
 		{ "borderpx",     INTEGER, &borderpx },
+		{ "cursorstyle",  INTEGER, &cursorstyle },
         	{ "doubleclicktimeout",    INTEGER, &doubleclicktimeout },
 	    	{ "tripleclicktimeout",    INTEGER, &tripleclicktimeout },
         	{ "cursorthickness",       INTEGER, &cursorthickness},
 		{ "cwscale",      FLOAT,   &cwscale },
-		{ "chscale",      FLOAT,   &chscale },
-		{ "cursorstyle",  INTEGER, &cursorstyle },			
+		{ "chscale",      FLOAT,   &chscale },		
 		{ "alpha",        FLOAT,   &alpha },
 };
 
