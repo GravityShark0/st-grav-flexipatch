@@ -16,7 +16,7 @@ st-flexipatch by bakkeby with my patches selected and some config fixes
 - USE_XFTFONTMATCH
 - VERTCENTER
 - VIM_BROWSE
-- VISUAL_BELL
+- VISUAL_BELL (wanna disable)
 - WIDE_GLYPHS
 - XRESOURCES
 - XRESOURCES_RELOAD
