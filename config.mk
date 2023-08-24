@@ -7,6 +7,7 @@ VERSION = 0.9
 PREFIX = /usr/local
 MANPREFIX = $(PREFIX)/share/man
 ICONPREFIX = $(PREFIX)/share/pixmaps # NETWMICON_PATCH
+# ICONPREFIX = $(PREFIX)/share/icons/hicolor/256x256/apps/ # NETWMICON_PATCH, if other doesn't work
 ICONNAME = st.png # NETWMICON_PATCH
 
 X11INC = /usr/X11R6/include
