@@ -170,7 +170,7 @@ unsigned int defaultfg = 259;
 unsigned int defaultcs = 256;
 unsigned int defaultrcs = 257;
 
-unsigned int const currentBg = 260, buffSize = 50000;
+unsigned int const currentBg = 260, buffSize = 10000;
 /// Enable double / triple click yanking / selection of word / line.
 int const mouseYank = 1, mouseSelect = 0;
 /// [Vim Browse] Colors for search results currently on screen.
