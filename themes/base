@@ -1,0 +1,26 @@
+! Styling
+Xft.antialias:         1
+Xft.hinting:           1
+Xft.autohint:          0
+Xft.hintstyle:         hintslight
+Xft.rgba:              rgb
+Xft.lcdfilter:         lcdefault
+
+! dmenu
+#include "dmenu"
+
+! st
+
+st.font:            UbuntuMono Nerd Font:pixelsize=18:style=Regular
+st.font2:           PowerlineSymbols:pixelsize=12
+
+st.borderpx:		6
+st.alpha:	        0.9	
+
+!st.tabspaces:		4
+!st.chscale:		1.0
+!st.cwscale:		1.0
+!st.blinktimeout:	800
+!st.cursorstyle:	4
+!st.bellvolume:		0
+!st.termname:		st-256color
