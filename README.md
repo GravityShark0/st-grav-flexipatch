@@ -21,8 +21,9 @@ st-flexipatch by bakkeby with my patches selected and some config fixes
 - XRESOURCES
 - XRESOURCES_RELOAD
 
-# Might add
+## Might add
 - CLIPBOARD (websites with copy button do not transfer, but ctrl + c or rightclick prompt works)
+
 
 > Some patches were selected not for need but it sounded cool. I could make another version with only essential patches but im lazy
 
