@@ -11,8 +11,9 @@ Xft.lcdfilter:         lcdefault
 
 ! st
 
-st.font:            UbuntuMono Nerd Font:pixelsize=18
-st.fontalt0:        Ubuntu Mono derivative Powerline:pixelsize=18
+! Reversed since UbuntuMono Nerd Font already has Powerline
+st.fontalt0:            UbuntuMono Nerd Font:pixelsize=18
+st.font:        Ubuntu Mono derivative Powerline:pixelsize=18
 ! st.fontalt1:           PowerlineSymbols:pixelsize=12
 ! st.fontalt2:           PowerlineSymbols:pixelsize=12
 
