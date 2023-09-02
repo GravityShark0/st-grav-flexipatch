@@ -11,12 +11,15 @@ Xft.lcdfilter:         lcdefault
 
 ! st
 
-st.font:            UbuntuMono Nerd Font:pixelsize=18:style=Regular
+st.font:            UbuntuMono Nerd Font:pixelsize=18:style=Medium
 st.fontalt0:        Ubuntu Mono derivative Powerline:pixelsize=18
 ! st.fontalt1:           PowerlineSymbols:pixelsize=12
 ! st.fontalt2:           PowerlineSymbols:pixelsize=12
 
+! window padding
 st.borderpx:		6
+
+! transparency 0.0-1.0
 st.alpha:	        0.9	
 
 !st.tabspaces:		4
