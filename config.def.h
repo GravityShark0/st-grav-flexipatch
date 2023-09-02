@@ -227,7 +227,9 @@ static unsigned int defaultattr = 11;
  */
 ResourcePref resources[] = {
 		{ "font",         STRING,  &font },
-        	{ "font2",        STRING,  &font2 },
+        	{ "fontalt0",        STRING,  &font2[0] },
+        	{ "fontalt1",        STRING,  &font2[1] },
+        	{ "fontalt2",        STRING,  &font2[2] },
 		{ "color0",       STRING,  &colorname[0] },
 		{ "color1",       STRING,  &colorname[1] },
 		{ "color2",       STRING,  &colorname[2] },
