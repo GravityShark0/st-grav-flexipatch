@@ -1,4 +1,4 @@
-#include "base"
+#include "../base"
 
 !colors
 st.cursorColor:	 	#F5E0DC

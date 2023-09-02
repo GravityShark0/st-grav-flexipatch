@@ -1,4 +1,4 @@
-#include "/home/gravityshark/.config/suckless/base"
+#include "../base"
 
 ! grav colors
 st.cursorColor:	 	#F2D5CF

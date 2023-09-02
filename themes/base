@@ -1,7 +1,7 @@
 ! Styling
 Xft.antialias:         1
 Xft.hinting:           1
-Xft.autohint:          0
+Xft.autohint:          1
 Xft.hintstyle:         hintslight
 Xft.rgba:              rgb
 Xft.lcdfilter:         lcdefault
@@ -11,7 +11,7 @@ Xft.lcdfilter:         lcdefault
 
 ! st
 
-st.font:            UbuntuMono Nerd Font:pixelsize=18:style=Medium
+st.font:            UbuntuMono Nerd Font:pixelsize=18
 st.fontalt0:        Ubuntu Mono derivative Powerline:pixelsize=18
 ! st.fontalt1:           PowerlineSymbols:pixelsize=12
 ! st.fontalt2:           PowerlineSymbols:pixelsize=12

@@ -1,6 +1,7 @@
 #include "base"
 
 ! grav colors
+
 st.cursorColor:	 	#DBDCFF
 !st.rcursorColor:
 st.foreground:	  	#fdeffd
