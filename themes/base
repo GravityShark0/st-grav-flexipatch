@@ -6,8 +6,6 @@ Xft.hintstyle:         hintslight
 Xft.rgba:              rgb
 Xft.lcdfilter:         lcdefault
 
-! dmenu
-#include "dmenu"
 
 ! st
 
