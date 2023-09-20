@@ -1,10 +1,9 @@
 #include "base"
 
 ! grav colors
-
 st.cursorColor:	 	#DBDCFF
 !st.rcursorColor:
-st.foreground:	  	#fdeffd
+st.foreground:	  	#ddddff
 st.background:	  	#0a060f
 
 ! vim select
