@@ -58,7 +58,7 @@ uhhh like
 ```
 xrdb merge <theme path>
 ```
-so yeah it can include other files and shit
+so yeah it can include other files and shit, and also install xrdb if you havent
 
 
 ### apply themes while terminals are still on
