@@ -26,7 +26,7 @@ st-flexipatch by bakkeby with my patches selected and some config fixes
 0. [dependers](https://github.com/siduck/st#dependencies)
 1. clone it lol
 ```
-git clone https://github.com/GravityShark0/st-grav-flexipatch.git && st-grav-flexipatch
+git clone https://github.com/GravityShark0/st-grav-flexipatch.git && cd st-grav-flexipatch
 ```
 2. and go an build it and stuff
 ```
