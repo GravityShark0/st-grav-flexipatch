@@ -50,16 +50,14 @@ install: st
 	tic -sx st.info
 	mkdir -p $(DESTDIR)$(PREFIX)/share/applications # desktop-entry patch
 	test -f ${DESTDIR}${PREFIX}/share/applications/st.desktop || cp -n st.desktop $(DESTDIR)$(PREFIX)/share/applications # desktop-entry patch
-	mkdir -p $(DESTDIR)$(ICONPREFIX) # desktop-entry patch
-	[ -f $(ICONNAME) ] && cp -f $(ICONNAME) $(DESTDIR)$(ICONPREFIX) || : # desktop-entry patch
-	@echo Please see the README file regarding the terminfo entry of st.
+	mkdir -p $(DESTDIR)$(ICONPREFIX) # netwmicon patch
+	[ -f $(ICONNAME) ] && cp -f $(ICONNAME) $(DESTDIR)$(ICONPREFIX) || : # netwmicon patch
+	@echo Please see the README file regarding the MASSVIE BALLS of this terminal.
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/st
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
 	rm -f $(DESTDIR)$(PREFIX)/share/applications/st.desktop # desktop-entry patch
-
-
 	rm -f $(DESTDIR)$(ICONPREFIX)/$(ICONNAME) # netwmicon patch
 
 .PHONY: all options clean dist install uninstall
