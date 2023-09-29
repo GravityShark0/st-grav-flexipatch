@@ -24,11 +24,11 @@ st-flexipatch by bakkeby with my patches selected and some config fixes
 
 ## how 2 build if yo dumb
 clone it lol
-```bash
+```
 $ https://github.com/GravityShark0/st-grav-flexipatch.git && st-grav-flexipatch
 ```
 and go an build it and stuff
-```bash
+```
 # make clean install
 ```
 
