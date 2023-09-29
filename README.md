@@ -1,7 +1,7 @@
 # st-grav-flexipatch
 st-flexipatch by bakkeby with my patches selected and some config fixes
 
-## Patches
+## what are de 1 patches
 - ALPHA (i like me them transparency)
 - ANYSIZE_SIMPLE (works)
 - BLINKING_CURSOR (cursor look cool)
