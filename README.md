@@ -37,7 +37,7 @@ git clone https://github.com/GravityShark0/st-grav-flexipatch.git && cd st-grav-
 rm -fr * && rmdir ../st-grav-flexipatch
 ```
 ## how 3 use kinda
-#### shortcuts
+### shortcuts
 - <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Left</kbd> decrease font size
 - <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Right</kbd> increase font size
 - <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Home</kbd> reset font size to default
@@ -52,13 +52,13 @@ rm -fr * && rmdir ../st-grav-flexipatch
 - <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> decrease opacity
 
 
-#### set themes
+### set themes
 uhhh like
 ```
 xrdb merge <theme path>
 ```
 so yeah it can include other files and shit
-#### apply themes while terminals are still on
+### apply themes while terminals are still on
 you just do like and it kinda works
 ```
 killall -USR1 st
