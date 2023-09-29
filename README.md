@@ -70,7 +70,7 @@ so yeah you can do it at once too
 ```
 xrdb <path> && killall -USR1 st &
 ```
-- edit make yo own themes
+### edit make yo own themes
 go read theme files or something, go copy and make a new one, you can figure it out yourself 
 
 
