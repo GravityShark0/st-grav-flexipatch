@@ -36,6 +36,7 @@ git clone https://github.com/GravityShark0/st-grav-flexipatch.git && cd st-grav-
 ```
 rm -fr * && rmdir ../st-grav-flexipatch
 ```
+
 ## how 3 use kinda
 ### shortcuts
 - <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Left</kbd> decrease font size
@@ -58,6 +59,8 @@ uhhh like
 xrdb merge <theme path>
 ```
 so yeah it can include other files and shit
+
+
 ### apply themes while terminals are still on
 you just do like and it kinda works
 ```
