@@ -155,9 +155,9 @@ static const char *colorname[] = {
 	"#000000", /* 258 -> bg */
 	"#e5e5e5", /* 259 -> fg */
 
-	"magenta3", /* 260 -> currentBg */
-	"gray50",   /* 261 -> highlightBg */
-	"#5c5cff",  /* 262 -> highlightFg */
+	"cyan", /* 260 -> currentBg */
+	"red3",   /* 261 -> highlightBg */
+	"gray30",  /* 262 -> highlightFg */
 };
 
 
