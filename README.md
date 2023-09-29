@@ -37,15 +37,38 @@ git clone https://github.com/GravityShark0/st-grav-flexipatch.git && cd st-grav-
 rm -fr * && rmdir ../st-grav-flexipatch
 ```
 ## how 3 use kinda
-- set themes
+#### shortcuts
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Left</kbd> decrease font size
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Right</kbd> increase font size
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Home</kbd> reset font size to default
+- <kbd>Shift</kbd> + <kbd>LMB</kbd> on a web link to open in browser (except when in like sshed into a tmux minecraft server)
+- <kbd>Alt</kbd> + <kbd>C</kbd> enter vim history view
+
+#### shortcuts you should probably already know or are never going to use
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> copy
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd> paste 
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Y</kbd> copy and paste selected region
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>O</kbd> increase opacity
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> decrease opacity
+
+
+#### set themes
 uhhh like
 ```
 xrdb merge <theme path>
 ```
-
-- reset themes
-- make yo own themes
-- shortcuts
+so yeah it can include other files and shit
+#### apply themes while terminals are still on
+you just do like and it kinda works
+```
+killall -USR1 st
+```
+so yeah you can do it at once too
+```
+xrdb <path> && killall -USR1 st &
+```
+- edit make yo own themes
+go read theme files or something, go copy and make a new one, you can figure it out yourself 
 
 
 ### Might add
