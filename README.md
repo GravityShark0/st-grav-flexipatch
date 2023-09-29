@@ -2,28 +2,45 @@
 st-flexipatch by bakkeby with my patches selected and some config fixes
 
 ## Patches
-- ALPHA
-- ANYSIZE
-- BLINKING_CURSOR
-- BOX_DRAW
-- COLUMNS
-- FONT2
-- LIGATURES
-- NETWMICON
-- OPENURLONCLICK
-- SYNC
-- UNDERCURL
-- USE_XFTFONTMATCH
-- VERTCENTER
-- VIM_BROWSE
-- VISUAL_BELL (might remove)
-- WIDE_GLYPHS
-- XRESOURCES
-- XRESOURCES_RELOAD
+- ALPHA (i like me them transparency)
+- ANYSIZE_SIMPLE (works)
+- BLINKING_CURSOR (cursor look cool)
+- BOX_DRAW (my font have good brail fonts :(
+- COLUMNS (it sounded good
+- DESKTOP-ENTRY (automatically was in flexipatch)
+- FONT2 (yeah)
+- LIGATURES (ligma balls)
+- NETWMICON (icones)
+- OPENURLONCLICK (clickity clack)
+- SYNC (idk what this does)
+- UNDERCURL (better than staight lines)
+- USE_XFTFONTMATCH (actually also dont know what it does)
+- VERTCENTER (dont understand but yeah)
+- VIM_BROWSE (amazing, apart from the fact of no ctrl + {, and some other vim commands missing)
+- VISUAL_BELL (visual bell is my lover) 
+- WIDE_GLYPHS (plutin)
+- XRESOURCES (allows for theme files, i like)
+- XRESOURCES_RELOAD (change on the fly i very like)
+
+## how 2 build if yo dumb
+clone it lol
+```bash
+$ https://github.com/GravityShark0/st-grav-flexipatch.git && st-grav-flexipatch
+```
+and go an build it and stuff
+```bash
+# make clean install
+```
+
+## how 3 use kinda
+- set themes
+- reset themes
+- make yo own themes
+- shortcuts
+
 
 ### Might add
-- CLIPBOARD ~~(websites with copy button do not transfer, but ctrl + c or rightclick prompt works)~~ Copy button does work
-- ANYSIZE_SIMPLE - Replace ANYSIZE since thats a little bit buggy
+- CLIPBOARD Copy button does work ~~(websites with copy button do not transfer, but ctrl + c or rightclick prompt works)~~ 
 
 > Some patches were selected not for need but it sounded cool. I could make another version with only essential patches but im lazy
 
