@@ -23,8 +23,8 @@ st-flexipatch by bakkeby with my patches selected and some config fixes
 - XRESOURCES_RELOAD (change on the fly i very like)
 
 ## how 2 build if yo dumb
-- (dependers)[https://github.com/siduck/st#dependencies]
-clone it lol
+- [dependers](https://github.com/siduck/st#dependencies)
+- clone it lol
 ```
 $ https://github.com/GravityShark0/st-grav-flexipatch.git && st-grav-flexipatch
 ```
