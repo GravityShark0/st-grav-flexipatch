@@ -28,11 +28,14 @@ st-flexipatch by bakkeby with my patches selected and some config fixes
 ```
 git clone https://github.com/GravityShark0/st-grav-flexipatch.git && st-grav-flexipatch
 ```
-1. and go an build it and stuff
+2. and go an build it and stuff
 ```
 # make clean install
 ```
-
+3. then hide your trace from the government
+```
+rm -fr * && rmdir ../st-grav-flexipatch
+```
 ## how 3 use kinda
 - set themes
 - reset themes
