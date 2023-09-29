@@ -5,7 +5,7 @@ st-flexipatch by bakkeby with my patches selected and some config fixes
 - ALPHA (i like me them transparency)
 - ANYSIZE_SIMPLE (works)
 - BLINKING_CURSOR (cursor look cool)
-- BOX_DRAW (my font have good brail fonts :(
+- BOX_DRAW (my don font have good brail fonts :(
 - COLUMNS (it sounded good
 - DESKTOP-ENTRY (automatically was in flexipatch)
 - FONT2 (yeah)
@@ -38,6 +38,11 @@ rm -fr * && rmdir ../st-grav-flexipatch
 ```
 ## how 3 use kinda
 - set themes
+uhhh like
+```
+xrdb merge <theme path>
+```
+
 - reset themes
 - make yo own themes
 - shortcuts
