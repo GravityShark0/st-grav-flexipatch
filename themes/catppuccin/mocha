@@ -3,7 +3,7 @@
 !colors
 st.cursorColor:	 	#fff8e7
 !st.rcursorColor:
-st.foreground:	  	#fff8e7
+st.foreground:	  	#CDD6F4
 st.background:	  	#12111b
 
 ! vim select
