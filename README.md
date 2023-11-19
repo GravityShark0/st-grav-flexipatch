@@ -7,6 +7,7 @@ st-flexipatch by bakkeby with my patches selected and some config fixes
 - BLINKING_CURSOR (cursor look cool)
 - BOX_DRAW (my don font have good brail fonts :(
 - COLUMNS (it sounded good
+- CLIPBOARD (i just realized its purpose)
 - DESKTOP-ENTRY (automatically was in flexipatch)
 - FONT2 (yeah)
 - LIGATURES (ligma balls)
@@ -75,7 +76,6 @@ go read theme files or something, go copy and make a new one, you can figure it 
 
 
 ### Might add
-- CLIPBOARD Copy button does work ~~(websites with copy button do not transfer, but ctrl + c or rightclick prompt works)~~ 
 
 > Some patches were selected not for need but it sounded cool. I could make another version with only essential patches but im lazy
 
