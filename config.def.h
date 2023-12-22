@@ -16,7 +16,7 @@ static char *font2[] = {
 static int borderpx = 2;
 
 /* modkey options: ControlMask, ShiftMask or XK_ANY_MOD */
-static uint url_opener_modkey = ShiftMask;
+static uint url_opener_modkey = ControlMask;
 static char *url_opener = "xdg-open";
 
 /*
