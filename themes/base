@@ -1,16 +1,24 @@
 ! Styling
+! 1440x900
+Xft.dpi: 89
+
 Xft.antialias:         1
+Xft.autohint:          0
 Xft.hinting:           1
-Xft.autohint:          1
-Xft.hintstyle:         hintslight
-Xft.rgba:              rgb
+Xft.hintstyle:         hintfull
 Xft.lcdfilter:         lcdefault
+Xft.rgba:              rgb
+
+!dmenu if you want to have dmenu
+! #include "dmenu"
 
 ! st
 
 ! i like this font now :)
-st.fontalt0:            Source Code Pro:pixelsize=16:style=Medium
-st.font:        Source Code Pro for Powerline:pixelsize=16:style=Medium
+! st.fontalt0:            FiraCode Nerd Font:pixelsize=16:style=Retina
+! st.font:        Fira Mono for Powerline:pixelsize=16:style=Medium
+! st.font:            nasin-nanpa:pixelsize=16:style=Regular
+st.font:            FiraCode Nerd Font:pixelsize=16:style=Retina
 
 ! Reversed since UbuntuMono Nerd Font already has Powerline
 ! st.fontalt0:            UbuntuMono Nerd Font:pixelsize=20
@@ -22,12 +30,12 @@ st.font:        Source Code Pro for Powerline:pixelsize=16:style=Medium
 st.borderpx:		6
 
 ! transparency 0.0-1.0
-st.alpha:	        0.9	
+st.alpha:	        0.8	
 
 !st.tabspaces:		4
 !st.chscale:		1.0
 !st.cwscale:		1.0
-!st.blinktimeout:	800
-!st.cursorstyle:	4
-!st.bellvolume:		0
+st.blinktimeout:	800
+st.cursorstyle:	4
+st.bellvolume:		0
 !st.termname:		st-256color

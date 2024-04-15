@@ -7,13 +7,7 @@ include config.mk
 SRC = st.c x.c $(LIGATURES_C) $(SIXEL_C)
 OBJ = $(SRC:.c=.o)
 
-all: options st
-
-options:
-	@echo st build options:
-	@echo "CFLAGS  = $(STCFLAGS)"
-	@echo "LDFLAGS = $(STLDFLAGS)"
-	@echo "CC      = $(CC)"
+all: st
 
 config.h:
 	cp config.def.h config.h
@@ -52,7 +46,7 @@ install: st
 	test -f ${DESTDIR}${PREFIX}/share/applications/st.desktop || cp -n st.desktop $(DESTDIR)$(PREFIX)/share/applications # desktop-entry patch
 	mkdir -p $(DESTDIR)$(ICONPREFIX) # netwmicon patch
 	[ -f $(ICONNAME) ] && cp -f $(ICONNAME) $(DESTDIR)$(ICONPREFIX) || : # netwmicon patch
-	@echo Please see the README file regarding the MASSVIE BALLS of this terminal.
+	@echo Please see the README file regarding the MASSIVE BALLS (terminfo) entry of this terminal (st).
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/st
@@ -60,4 +54,4 @@ uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/share/applications/st.desktop # desktop-entry patch
 	rm -f $(DESTDIR)$(ICONPREFIX)/$(ICONNAME) # netwmicon patch
 
-.PHONY: all options clean dist install uninstall
+.PHONY: all clean dist install uninstall

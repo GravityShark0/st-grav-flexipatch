@@ -5,19 +5,16 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "mono:pixelsize=12:antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
-	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true",
+	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true", 
 /*	"Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true", */
 };
 
 
 static int borderpx = 2;
 
-/* modkey options: ControlMask, ShiftMask or XK_ANY_MOD */
-static uint url_opener_modkey = ControlMask;
-static char *url_opener = "xdg-open";
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -34,7 +31,10 @@ char *scroll = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* identification sequence returned in DA and DECID */
-char *vtiden = "\033[?6c";
+char *vtiden = "\033[?62;4c"; /* VT200 family (62) with sixel (4) */
+
+/* sixel rgb byte order: LSBFirst or MSBFirst */
+int const sixelbyteorder = LSBFirst;
 
 /* Kerning / character bounding-box multipliers */
 static float cwscale = 1.0;
@@ -46,6 +46,10 @@ static float chscale = 1.0;
  * More advanced example: L" `'\"()[]{}"
  */
 wchar_t *worddelimiters = L" ";
+
+/* Word delimiters for short and long jumps in the keyboard select patch */
+wchar_t *kbds_sdelim = L"!\"#$%&'()*+,-./:;<=>?@[\\]^`{|}~ ";
+wchar_t *kbds_ldelim = L" ";
 
 /* selection timeouts (in milliseconds) */
 static unsigned int doubleclicktimeout = 300;
@@ -64,7 +68,7 @@ int allowwindowops = 0;
  * near minlatency, but it waits longer for slow updates to avoid partial draw.
  * low minlatency will tear/flicker more, as it can "detect" idle too early.
  */
-static double minlatency = 8;
+static double minlatency = 2;
 static double maxlatency = 33;
 
 /*
@@ -83,6 +87,7 @@ static unsigned int blinktimeout = 800;
  * thickness of underline and bar cursors
  */
 static unsigned int cursorthickness = 2;
+
 
 /*
  * 1: render most of the lines/blocks characters without using the font for
@@ -154,10 +159,6 @@ static const char *colorname[] = {
 	"#555555", /* 257 -> rev cursor*/
 	"#000000", /* 258 -> bg */
 	"#e5e5e5", /* 259 -> fg */
-
-	"cyan", /* 260 -> currentBg */
-	"red3",   /* 261 -> highlightBg */
-	"gray30",  /* 262 -> highlightFg */
 };
 
 
@@ -169,38 +170,18 @@ unsigned int defaultbg = 258;
 unsigned int defaultfg = 259;
 unsigned int defaultcs = 256;
 unsigned int defaultrcs = 257;
-
-unsigned int const currentBg = 260, buffSize = 2048;
-/// Enable double / triple click yanking / selection of word / line.
-int const mouseYank = 1, mouseSelect = 0;
-/// [Vim Browse] Colors for search results currently on screen.
-unsigned int const highlightBg = 261, highlightFg = 262;
-char const wDelS[] = "!\"#$%&'()*+,-./:;<=>?@[\\]^`{|}~", wDelL[] = " \t";
-char *nmKeys [] = {              ///< Shortcusts executed in normal mode
-  "R/Building\nN", "r/Building\n", "X/juli@machine\nN", "x/juli@machine\n",
-  "Q?[Leaving vim, starting execution]\n","F/: error:\nN", "f/: error:\n", "DQf"
-};
-unsigned int const amountNmKeys = sizeof(nmKeys) / sizeof(*nmKeys);
-/// Style of the {command, search} string shown in the right corner (y,v,V,/)
-Glyph styleSearch = {' ', ATTR_ITALIC | ATTR_BOLD_FAINT, 7, 16};
-Glyph style[] = {{' ',ATTR_ITALIC|ATTR_FAINT,15,16}, {' ',ATTR_ITALIC,232,11},
-                 {' ', ATTR_ITALIC, 232, 4}, {' ', ATTR_ITALIC, 232, 12}};
+/* Foreground and background color of search results */
+unsigned int highlightfg = 15;
+unsigned int highlightbg = 160;
 
 /*
- * https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h4-Functions-using-CSI-_-ordered-by-the-final-character-lparen-s-rparen:CSI-Ps-SP-q.1D81
- * Default style of cursor
- * 0: Blinking block
- * 1: Blinking block (default)
- * 2: Steady block ("â–ˆ")
- * 3: Blinking underline
- * 4: Steady underline ("_")
- * 5: Blinking bar
- * 6: Steady bar ("|")
- * 7: Blinking st cursor
- * 8: Steady st cursor
+ * Default shape of cursor
+ * 2: Block ("█")
+ * 4: Underline ("_")
+ * 6: Bar ("|")
+ * 7: Snowman ("☃")
  */
-static unsigned int cursorstyle = 1;
-static Rune stcursor = 0x2603; /* snowman (U+2603) */
+static unsigned int cursorshape = 2;
 
 /*
  * Default columns and rows numbers
@@ -227,9 +208,9 @@ static unsigned int defaultattr = 11;
  */
 ResourcePref resources[] = {
 		{ "font",         STRING,  &font },
-		{ "fontalt0",     STRING,  &font2[0] },
-		{ "fontalt1",     STRING,  &font2[1] },
-		{ "fontalt2",     STRING,  &font2[2] },
++               { "fontalt0",     STRING,  &font2[0] },
++               { "fontalt1",     STRING,  &font2[1] },
++               { "fontalt2",     STRING,  &font2[2] },
 		{ "color0",       STRING,  &colorname[0] },
 		{ "color1",       STRING,  &colorname[1] },
 		{ "color2",       STRING,  &colorname[2] },
@@ -246,13 +227,9 @@ ResourcePref resources[] = {
 		{ "color13",      STRING,  &colorname[13] },
 		{ "color14",      STRING,  &colorname[14] },
 		{ "color15",      STRING,  &colorname[15] },
-		{ "cursorColor",  STRING,  &colorname[256] },
-		{ "rcursorColor", STRING,  &colorname[257] },
 		{ "background",   STRING,  &colorname[258] },
 		{ "foreground",   STRING,  &colorname[259] },
-        	{ "currentBg",    STRING,  &colorname[260] },
-        	{ "highlightBg",  STRING,  &colorname[261] },
-        	{ "highlightFg",  STRING,  &colorname[262] },
+		{ "cursorColor",  STRING,  &colorname[256] },
 		{ "termname",     STRING,  &termname },
 		{ "shell",        STRING,  &shell },
 		{ "minlatency",   INTEGER, &minlatency },
@@ -261,13 +238,12 @@ ResourcePref resources[] = {
 		{ "bellvolume",   INTEGER, &bellvolume },
 		{ "tabspaces",    INTEGER, &tabspaces },
 		{ "borderpx",     INTEGER, &borderpx },
-		{ "cursorstyle",  INTEGER, &cursorstyle },
-        	{ "doubleclicktimeout",    INTEGER, &doubleclicktimeout },
-	    	{ "tripleclicktimeout",    INTEGER, &tripleclicktimeout },
-        	{ "cursorthickness",       INTEGER, &cursorthickness},
+		{ "highlightfg",  INTEGER, &highlightfg },
+		{ "highlightbg",  INTEGER, &highlightbg },
 		{ "cwscale",      FLOAT,   &cwscale },
-		{ "chscale",      FLOAT,   &chscale },		
+		{ "chscale",      FLOAT,   &chscale },
 		{ "alpha",        FLOAT,   &alpha },
+		{"cursorshape", INTEGER, &cursorshape}
 };
 
 /*
@@ -283,16 +259,26 @@ static uint forcemousemod = ShiftMask;
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release  screen */
-	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
+	{ XK_ANY_MOD,           Button2, clippaste,      {.i = 0},      1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
-	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
-	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
+	{ XK_NO_MOD,            Button4, kscrollup,      {.i = 1},      0, S_PRI },
+	{ XK_NO_MOD,            Button5, kscrolldown,    {.i = 1},      0, S_PRI },
+	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"}, 0, S_ALT },
+	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"}, 0, S_ALT },
 };
 
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
+
+static char *openurlcmd[] = { "/bin/sh", "-c",
+	"xurls | dmenu -l 10 -w $WINDOWID | xargs -r open",
+	"externalpipe", NULL };
+
+static char *setbgcolorcmd[] = { "/bin/sh", "-c",
+	"printf '\033]11;#008000\007'",
+	"externalpipein", NULL };
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function         argument   screen */
@@ -300,17 +286,19 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,   {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,     {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,        {.i =  0} },
-	{ TERMMOD,              XK_Right,       zoom,            {.f = +2} },
-	{ TERMMOD,              XK_Left,        zoom,            {.f = -2} },
+	{ TERMMOD,              XK_Right,       zoom,            {.f = +1} },
+	{ TERMMOD,              XK_Left,        zoom,            {.f = -1} },
 	{ TERMMOD,              XK_Home,        zoomreset,       {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,        {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,       {.i =  0} },
 	{ TERMMOD,              XK_O,           changealpha,     {.f = +0.05} },
 	{ TERMMOD,              XK_P,           changealpha,     {.f = -0.05} },
-	{ TERMMOD,              XK_Y,           selpaste,        {.i =  0} },
-	{ ShiftMask,            XK_Insert,      selpaste,        {.i =  0} },
+	{ TERMMOD,              XK_Y,           clippaste,       {.i =  0} },
+	{ ShiftMask,            XK_Insert,      clippaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,         {.i =  0} },
-	{ MODKEY,               XK_c,           normalMode,      {.i =  0} },
+	{ TERMMOD,              XK_Escape,      keyboard_select, { 0 } },
+	{ TERMMOD,              XK_F,           searchforward,   { 0 } },
+	{ TERMMOD,              XK_B,           searchbackward,  { 0 } },
 };
 
 /*
@@ -606,4 +594,4 @@ static char ascii_printable[] =
 #define UNDERCURL_SPIKY 1
 #define UNDERCURL_CAPPED 2
 // Active style
-#define UNDERCURL_STYLE UNDERCURL_SPIKY
+#define UNDERCURL_STYLE UNDERCURL_CURLY

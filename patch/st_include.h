@@ -1,6 +1,4 @@
 /* Patches */
-#include "openurlonclick.h"
+#include "keyboardselect_reflow_st.h"
+#include "reflow.h"
 #include "sync.h"
-// #if VIM_BROWSE_PATCH
-// #include "normalMode.h"
-// #endif

@@ -1,6 +1,7 @@
 /* See LICENSE for license details. */
 
 #include <stdint.h>
+#include <time.h>
 #include <sys/types.h>
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
@@ -14,7 +15,6 @@
 #define MAX(a, b)		((a) < (b) ? (b) : (a))
 #define LEN(a)			(sizeof(a) / sizeof(a)[0])
 #define BETWEEN(x, a, b)	((a) <= (x) && (x) <= (b))
-#define OUT(x, a, b)		((a) <= (x) || (x) <= (b))
 #define DIVCEIL(n, d)		(((n) + ((d) - 1)) / (d))
 #define DEFAULT(a, b)		(a) = (a) ? (a) : (b)
 #define LIMIT(x, a, b)		(x) = (x) < (a) ? (a) : (x) > (b) ? (b) : (x)
@@ -27,26 +27,43 @@
 
 #define TRUECOLOR(r,g,b)	(1 << 24 | (r) << 16 | (g) << 8 | (b))
 #define IS_TRUECOL(x)		(1 << 24 & (x))
+#define HISTSIZE      2000
 
 enum glyph_attribute {
-	ATTR_NULL       = 0,
-	ATTR_BOLD       = 1 << 0,
-	ATTR_FAINT      = 1 << 1,
-	ATTR_ITALIC     = 1 << 2,
-	ATTR_UNDERLINE  = 1 << 3,
-	ATTR_BLINK      = 1 << 4,
-	ATTR_REVERSE    = 1 << 5,
-	ATTR_INVISIBLE  = 1 << 6,
-	ATTR_STRUCK     = 1 << 7,
-	ATTR_WRAP       = 1 << 8,
-	ATTR_WIDE       = 1 << 9,
-	ATTR_WDUMMY     = 1 << 10,
-	ATTR_BOXDRAW    = 1 << 11,
-	ATTR_LIGA       = 1 << 12,
+	ATTR_NULL           = 0,
+	ATTR_SET            = 1 << 0,
+	ATTR_BOLD           = 1 << 1,
+	ATTR_FAINT          = 1 << 2,
+	ATTR_ITALIC         = 1 << 3,
+	ATTR_UNDERLINE      = 1 << 4,
+	ATTR_BLINK          = 1 << 5,
+	ATTR_REVERSE        = 1 << 6,
+	ATTR_INVISIBLE      = 1 << 7,
+	ATTR_STRUCK         = 1 << 8,
+	ATTR_WRAP           = 1 << 9,
+	ATTR_WIDE           = 1 << 10,
+	ATTR_WDUMMY         = 1 << 11,
+	ATTR_BOXDRAW        = 1 << 13,
+	ATTR_DIRTYUNDERLINE = 1 << 14,
+	ATTR_LIGA           = 1 << 15,
+	ATTR_SIXEL          = 1 << 16,
+	ATTR_HIGHLIGHT      = 1 << 17,
 	ATTR_BOLD_FAINT = ATTR_BOLD | ATTR_FAINT,
-	ATTR_DIRTYUNDERLINE = 1 << 15,
 };
 
+typedef struct _ImageList {
+	struct _ImageList *next, *prev;
+	unsigned char *pixels;
+	void *pixmap;
+	int width;
+	int height;
+	int x;
+	int y;
+	int reflow_y;
+	int cols;
+	int cw;
+	int ch;
+} ImageList;
 
 enum drawing_mode {
 	DRAW_NONE = 0,
@@ -91,7 +108,7 @@ typedef XftGlyphFontSpec GlyphFontSpec;
 #define Glyph Glyph_
 typedef struct {
 	Rune u;           /* character code */
-	ushort mode;      /* attribute flags */
+	uint32_t mode;    /* attribute flags */
 	uint32_t fg;      /* foreground  */
 	uint32_t bg;      /* background  */
 	int ustyle;	      /* underline style */
@@ -99,6 +116,13 @@ typedef struct {
 } Glyph;
 
 typedef Glyph *Line;
+
+typedef struct {
+	int ox;
+	int charlen;
+	int numspecs;
+	Glyph base;
+} GlyphFontSeq;
 
 typedef struct {
 	Glyph attr; /* current char attributes */
@@ -113,6 +137,11 @@ typedef struct {
 	int col;      /* nb col */
 	Line *line;   /* screen */
 	Line *alt;    /* alternate screen */
+	Line hist[HISTSIZE]; /* history buffer */
+	int histi;           /* history index */
+	int histf;           /* nb history available */
+	int scr;             /* scroll back */
+	int wrapcwidth[2];   /* used in updating WRAPNEXT when resizing */
 	int *dirty;   /* dirtyness of lines */
 	TCursor c;    /* cursor */
 	int ocx;      /* old cursor col */
@@ -125,6 +154,8 @@ typedef struct {
 	int charset;  /* current charset */
 	int icharset; /* selected charset for sequence */
 	int *tabs;
+	ImageList *images;     /* sixel images */
+	ImageList *images_alt; /* sixel images for alternate screen */
 	Rune lastc;   /* last printed char outside of sequence, 0 if control */
 } Term;
 
@@ -140,7 +171,6 @@ typedef union {
 typedef struct {
 	int tw, th; /* tty width and height */
 	int w, h; /* window width and height */
-	int hborderpx, vborderpx;
 	int ch; /* char height */
 	int cw; /* char width  */
 	int cyo; /* char y offset */
@@ -154,6 +184,7 @@ typedef struct {
 	Window win;
 	Drawable buf;
 	GlyphFontSpec *specbuf; /* font spec buffer used for rendering */
+	GlyphFontSeq *specseq;
 	Atom xembed, wmdeletewin, netwmname, netwmiconname, netwmpid;
 	Atom netwmicon;
 	struct {
@@ -165,12 +196,6 @@ typedef struct {
 	Draw draw;
 	Visual *vis;
 	XSetWindowAttributes attrs;
-	/* Here, we use the term *pointer* to differentiate the cursor
-	 * one sees when hovering the mouse over the terminal from, e.g.,
-	 * a green rectangle where text would be entered. */
-	Cursor vpointer, bpointer; /* visible and hidden pointers */
-	int pointerisvisible;
-	Cursor upointer;
 	int scr;
 	int isfixed; /* is fixed geometry? */
 	int depth; /* bit depth */
@@ -251,7 +276,6 @@ int tattrset(int);
 int tisaltscr(void);
 void tnew(int, int);
 void tresize(int, int);
-void tmoveto(int x, int y);
 void tsetdirtattr(int);
 void ttyhangup(void);
 int ttynew(const char *, char *, const char *, char **);
@@ -263,6 +287,7 @@ void resettitle(void);
 
 void selclear(void);
 void selinit(void);
+void selremove(void);
 void selstart(int, int, int);
 void selextend(int, int, int, int);
 int selected(int, int);
@@ -290,6 +315,8 @@ extern char *scroll;
 extern char *stty_args;
 extern char *vtiden;
 extern wchar_t *worddelimiters;
+extern wchar_t *kbds_sdelim;
+extern wchar_t *kbds_ldelim;
 extern int allowaltscreen;
 extern int allowwindowops;
 extern char *termname;
