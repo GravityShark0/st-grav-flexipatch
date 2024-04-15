@@ -46,7 +46,7 @@ install: st
 	test -f ${DESTDIR}${PREFIX}/share/applications/st.desktop || cp -n st.desktop $(DESTDIR)$(PREFIX)/share/applications # desktop-entry patch
 	mkdir -p $(DESTDIR)$(ICONPREFIX) # netwmicon patch
 	[ -f $(ICONNAME) ] && cp -f $(ICONNAME) $(DESTDIR)$(ICONPREFIX) || : # netwmicon patch
-	@echo Please see the README file regarding the MASSIVE BALLS (terminfo) entry of this terminal (st).
+	@echo Please see the README file regarding the MASSIVE BALLS [terminfo] entry of this terminal [st].
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/st

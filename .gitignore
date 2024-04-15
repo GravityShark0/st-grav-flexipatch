@@ -1,2 +1,4 @@
+# Files created during build time
 config.h
-st.o
+*.o
+st
