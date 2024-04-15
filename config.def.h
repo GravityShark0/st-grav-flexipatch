@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
 /*	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true", */
@@ -95,11 +95,11 @@ static unsigned int cursorthickness = 2;
  *    Bold affects lines thickness if boxdraw_bold is not 0. Italic is ignored.
  * 0: disable (render all U25XX glyphs normally from the font).
  */
-const int boxdraw = 1;
-const int boxdraw_bold = 1;
+const int boxdraw = 0;
+const int boxdraw_bold = 0;
 
 /* braille (U28XX):  1: render as adjacent "pixels",  0: use font */
-const int boxdraw_braille = 1;
+const int boxdraw_braille = 0;
 
 /*
  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
@@ -208,9 +208,6 @@ static unsigned int defaultattr = 11;
  */
 ResourcePref resources[] = {
 		{ "font",         STRING,  &font },
-		{ "fontalt0",     STRING,  &font2[0] },
-		{ "fontalt1",     STRING,  &font2[1] },
-		{ "fontalt2",     STRING,  &font2[2] },
 		{ "color0",       STRING,  &colorname[0] },
 		{ "color1",       STRING,  &colorname[1] },
 		{ "color2",       STRING,  &colorname[2] },
@@ -238,12 +235,11 @@ ResourcePref resources[] = {
 		{ "bellvolume",   INTEGER, &bellvolume },
 		{ "tabspaces",    INTEGER, &tabspaces },
 		{ "borderpx",     INTEGER, &borderpx },
-		{ "highlightfg",  INTEGER, &highlightfg },
-		{ "highlightbg",  INTEGER, &highlightbg },
 		{ "cwscale",      FLOAT,   &cwscale },
 		{ "chscale",      FLOAT,   &chscale },
 		{ "alpha",        FLOAT,   &alpha },
-		{ "cursorshape",  INTEGER, &cursorshape}
+		{ "highlightfg",  INTEGER, &highlightfg },
+		{ "highlightbg",  INTEGER, &highlightbg },
 };
 
 /*
@@ -286,10 +282,8 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,   {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,     {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,        {.i =  0} },
-	{ TERMMOD,              XK_Right,       zoom,            {.f = +1} },
-	{ TERMMOD,              XK_Left,        zoom,            {.f = -1} },
-	{ TERMMOD,              XK_Up,		zoom,            {.f = +2} },
-	{ TERMMOD,              XK_Down,        zoom,            {.f = -2} },
+	{ TERMMOD,              XK_Prior,       zoom,            {.f = +1} },
+	{ TERMMOD,              XK_Next,        zoom,            {.f = -1} },
 	{ TERMMOD,              XK_Home,        zoomreset,       {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,        {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,       {.i =  0} },
@@ -298,7 +292,7 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           clippaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      clippaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,         {.i =  0} },
-	{ TERMMOD,              XK_Q,		keyboard_select, { 0 } },
+	{ TERMMOD,              XK_Escape,      keyboard_select, { 0 } },
 	{ TERMMOD,              XK_F,           searchforward,   { 0 } },
 	{ TERMMOD,              XK_B,           searchbackward,  { 0 } },
 };
@@ -596,4 +590,4 @@ static char ascii_printable[] =
 #define UNDERCURL_SPIKY 1
 #define UNDERCURL_CAPPED 2
 // Active style
-#define UNDERCURL_STYLE UNDERCURL_CAPPED
+#define UNDERCURL_STYLE UNDERCURL_SPIKY
