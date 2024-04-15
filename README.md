@@ -11,7 +11,7 @@ st-flexipatch by bakkeby with my patches selected and some config fixes
 - BOLD_IS_NOT_BRIGHT
   > it seemed correct
 - BOX_DRAW
-  > (my don font have good brail fonts :()
+  > (my don font have good brail fonts :() )
 - CLIPBOARD
   > i just realized its purpose
 - DESKTOP-ENTRY
@@ -47,9 +47,6 @@ st-flexipatch by bakkeby with my patches selected and some config fixes
 
 0. [dependers](https://github.com/siduck/st#dependencies)
 
-- including gd (build with png support)
-- or just disable it in config.mk if you dont wanna
-
 1. clone it lol
 
 ```
@@ -71,12 +68,13 @@ rm -fr * && rmdir ../st-grav-flexipatch
 ## how 3 use kinda
 
 ### the only shortcuts you are probably gonna use (just look in config.def.h for the others)
+
 - <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Down</kbd> decrease font size by 2
 - <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Up</kbd> increase font size by 2
 - <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Home</kbd> reset font size to default
-- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Q</kbd> enter keyboard selection ([bindings](./patch/keyboardselect_reflow.txt)
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Q</kbd> enter keyboard selection ([bindings](./patch/keyboardselect_reflow.txt))
 
-### set themes
+## set themes
 
 uhhh like
 
@@ -86,7 +84,7 @@ xrdb merge <theme path>
 
 so yeah it can include other files and shit, and also install xrdb if you havent
 
-### apply themes while terminals are still on
+### apply themes while terminals are still on (live reload)
 
 you just do like and it kinda works
 
@@ -100,17 +98,13 @@ so yeah you can do it at once too
 xrdb <path> && killall -USR1 st &
 ```
 
-### edit make yo own themes
+### how 2 make yo own themes
 
 go read theme files or something, go copy and make a new one, you can figure it out yourself
 
-### Might add
-
-> Some patches were selected not for need but it sounded cool. I could make another version with only essential patches but im lazy
-
 Thanks to [bakkeby](https://github.com/bakkeby/st-flexipatch) and to [suckless](https://st.suckless.org/)
 
-original README
+# original README
 
 ```
 st - simple terminal
