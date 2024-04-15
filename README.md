@@ -67,6 +67,9 @@ dnf install gd-devel libXft-devel
 zypper in -t pattern devel_basis
 zypper in gd-devel libXft-devel harfbuzz-devel
 
+# Gentoo
+emerge -av st-terminfo gd libXft xorg-server
+
 # Install font-symbola and libXft-bgra
 ```
 
