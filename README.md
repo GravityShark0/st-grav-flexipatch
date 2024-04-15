@@ -70,21 +70,11 @@ rm -fr * && rmdir ../st-grav-flexipatch
 
 ## how 3 use kinda
 
-### shortcuts
-
-- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Left</kbd> decrease font size
-- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Right</kbd> increase font size
+### the only shortcuts you are probably gonna use (just look in config.def.h for the others)
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Down</kbd> decrease font size by 2
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Up</kbd> increase font size by 2
 - <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Home</kbd> reset font size to default
-- <kbd>Shift</kbd> + <kbd>LMB</kbd> on a web link to open in browser (except when in like sshed into a tmux minecraft server)
-- <kbd>Alt</kbd> + <kbd>C</kbd> enter vim history view
-
-#### shortcuts you should probably already know or are never going to use
-
-- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> copy
-- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd> paste
-- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Y</kbd> copy and paste selected region
-- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>O</kbd> increase opacity
-- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> decrease opacity
+- <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Q</kbd> enter keyboard selection ([bindings](./patch/keyboardselect_reflow.txt)
 
 ### set themes
 
