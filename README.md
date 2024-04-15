@@ -47,6 +47,29 @@ st-flexipatch by bakkeby with my patches selected and some config fixes
 
 0. [dependers](https://github.com/siduck/st#dependencies)
 
+```
+# Void
+xbps-install libXft-devel libX11-devel harfbuzz-devel libXext-devel libXrender-devel libXinerama-devel gd-devel
+
+# Debian (and ubuntu probably)
+apt install build-essential libxft-dev libharfbuzz-dev libgd-dev
+
+# Nix
+nix develop github:siduck/st
+
+# Arch
+pacman -S gd
+
+# Fedora (or Red-Hat based)
+dnf install gd-devel libXft-devel
+
+# SUSE (or openSUSE)
+zypper in -t pattern devel_basis
+zypper in gd-devel libXft-devel harfbuzz-devel
+
+# Install font-symbola and libXft-bgra
+```
+
 1. clone it lol
 
 ```
