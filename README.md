@@ -46,6 +46,10 @@ st-flexipatch by bakkeby with my patches selected and some config fixes
 ## how 2 build if yo dumb
 
 0. [dependers](https://github.com/siduck/st#dependencies)
+
+- including gd (build with png support)
+- or just disable it in config.mk if you dont wanna
+
 1. clone it lol
 
 ```
