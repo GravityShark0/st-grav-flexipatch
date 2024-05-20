@@ -55,4 +55,4 @@ STLDFLAGS = $(LIBS) $(LDFLAGS)
 
 # compiler and linker
 # CC = c99
-CC = x86_64-pc-linux-gnu-gcc
+# CC = x86_64-pc-linux-gnu-gcc
