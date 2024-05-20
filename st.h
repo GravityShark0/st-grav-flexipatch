@@ -55,6 +55,7 @@ typedef struct _ImageList {
 	struct _ImageList *next, *prev;
 	unsigned char *pixels;
 	void *pixmap;
+	void *clipmask;
 	int width;
 	int height;
 	int x;
@@ -63,6 +64,7 @@ typedef struct _ImageList {
 	int cols;
 	int cw;
 	int ch;
+	int transparent;
 } ImageList;
 
 enum drawing_mode {
@@ -171,6 +173,7 @@ typedef union {
 typedef struct {
 	int tw, th; /* tty width and height */
 	int w, h; /* window width and height */
+	int hborderpx, vborderpx;
 	int ch; /* char height */
 	int cw; /* char width  */
 	int cyo; /* char y offset */

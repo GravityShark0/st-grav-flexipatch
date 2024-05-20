@@ -396,7 +396,6 @@ selinit(void)
 	sel.ob.x = -1;
 }
 
-
 void
 selstart(int col, int row, int snap)
 {
@@ -471,9 +470,6 @@ selnormalize(void)
 	if (sel.ne.x >= tlinelen(TLINE(sel.ne.y)))
 		sel.ne.x = term.col - 1;
 }
-
-
-
 
 void
 selclear(void)
@@ -566,7 +562,6 @@ sigchld(int a)
 
 	if (pid != p)
 		return;
-
 
 	if (WIFEXITED(stat) && WEXITSTATUS(stat))
 		die("child exited with status %d\n", WEXITSTATUS(stat));
@@ -902,11 +897,6 @@ treset(void)
 	tfulldirt();
 }
 
-
-
-
-
-
 void
 tnewline(int first_col)
 {
@@ -947,6 +937,7 @@ csiparse(void)
 {
 	char *p = csiescseq.buf, *np;
 	long int v;
+	int sep = ';'; /* colon or semi-colon, but not both */
 
 	csiescseq.narg = 0;
 	if (*p == '?') {
@@ -965,7 +956,9 @@ csiparse(void)
 		csiescseq.arg[csiescseq.narg++] = v;
 		p = np;
 		readcolonargs(&p, csiescseq.narg-1, csiescseq.carg);
-		if (*p != ';' || csiescseq.narg == ESC_ARG_SIZ)
+		if (sep == ';' && *p == ':')
+			sep = ':'; /* allow override to colon once */
+		if (*p != sep || csiescseq.narg == ESC_ARG_SIZ)
 			break;
 		p++;
 	}
@@ -1036,9 +1029,6 @@ tsetchar(Rune u, const Glyph *attr, int x, int y)
 	if (isboxdraw(u))
 		term.line[y][x].mode |= ATTR_BOXDRAW;
 }
-
-
-
 
 void
 tinsertblankline(int n)
@@ -1866,14 +1856,18 @@ strhandle(void)
 			y1 = newimages->y;
 			x2 = x1 + newimages->cols;
 			y2 = y1 + numimages;
-			for (tail = NULL, im = term.images; im; im = next) {
-				next = im->next;
-				if (im->x >= x1 && im->x + im->cols <= x2 &&
-					im->y >= y1 && im->y <= y2) {
-					delete_image(im);
-					continue;
+			if (newimages->transparent) {
+				for (tail = term.images; tail && tail->next; tail = tail->next);
+			} else {
+				for (tail = NULL, im = term.images; im; im = next) {
+					next = im->next;
+					if (im->x >= x1 && im->x + im->cols <= x2 &&
+					    im->y >= y1 && im->y <= y2) {
+						delete_image(im);
+						continue;
+					}
+					tail = im;
 				}
-				tail = im;
 			}
 			if (tail) {
 				tail->next = newimages;
@@ -1897,8 +1891,7 @@ strhandle(void)
 					line = term.line[term.c.y];
 				}
 				for (x = im->x; x < x2; x++) {
-					line[x].u = ' ';
-					line[x].mode = ATTR_SIXEL;
+					line[x].mode |= ATTR_SIXEL;
 				}
 				term.dirty[MIN(im->y, term.row-1)] = 1;
 				if (!IS_SET(MODE_SIXEL_SDM) && i < numimages-1) {
@@ -2029,7 +2022,6 @@ tdumpsel(void)
 		free(ptr);
 	}
 }
-
 
 void
 tdump(void)
@@ -2218,7 +2210,7 @@ tcontrolcode(uchar ascii)
 void
 dcshandle(void)
 {
-	int bgcolor;
+	int bgcolor, transparent;
 	unsigned char r, g, b, a = 255;
 
 	switch (csiescseq.mode[0]) {
@@ -2238,6 +2230,7 @@ dcshandle(void)
 			goto unknown;
 		break;
 	case 'q': /* DECSIXEL */
+		transparent = (csiescseq.narg >= 2 && csiescseq.arg[1] == 1);
 		if (IS_TRUECOL(term.c.attr.bg)) {
 			r = term.c.attr.bg >> 16 & 255;
 			g = term.c.attr.bg >> 8 & 255;
@@ -2248,7 +2241,7 @@ dcshandle(void)
 				a = dc.col[defaultbg].pixel >> 24 & 255;
 		}
 		bgcolor = a << 24 | r << 16 | g << 8 | b;
-		if (sixel_parser_init(&sixel_st, (255 << 24), bgcolor, 1, win.cw, win.ch) != 0)
+		if (sixel_parser_init(&sixel_st, transparent, (255 << 24), bgcolor, 1, win.cw, win.ch) != 0)
 			perror("sixel_parser_init() failed");
 		term.mode |= MODE_SIXEL;
 		break;
@@ -2554,7 +2547,6 @@ twrite(const char *buf, int buflen, int show_ctrl)
 	}
 	return n;
 }
-
 
 void
 resettitle(void)
