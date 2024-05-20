@@ -6,8 +6,8 @@ st-flexipatch by bakkeby with my patches selected and some config fixes
 
 - ALPHA
   > i like me them transparency
-- ANYSIZE_SIMPLE
-  > works
+- ANYSIZE
+  > it centers the text
 - BOLD_IS_NOT_BRIGHT
   > it seemed correct
 - BOX_DRAW
