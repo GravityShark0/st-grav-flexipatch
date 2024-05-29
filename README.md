@@ -45,6 +45,8 @@ st-flexipatch by bakkeby with my patches selected and some config fixes
 
 ## how 2 build if yo dumb
 
+or use my [ebuild](https://github.com/GravityShark0/gravitypersonal)
+
 0. [dependers](https://github.com/siduck/st#dependencies)
 
 ```
