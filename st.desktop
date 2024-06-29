@@ -1,8 +1,12 @@
+# From https://wiki.archlinux.org/title/St#Desktop_entry
 [Desktop Entry]
-Name=simple terminal
-Comment=st is a simple terminal implementation for X
+Name=Simple Terminal
+GenericName=Terminal
+Comment=Suckless terminal emulator for X
 Exec=st
-Icon=utilities-terminal
 Terminal=false
 Type=Application
+Encoding=UTF-8
+Icon=utilities-terminal
 Categories=System;TerminalEmulator;
+Keywords=shell;prompt;command;commandline;cmd;
