@@ -1,3 +1,4 @@
+#define FONT2_PATCH 0
 /* See LICENSE file for copyright and license details. */
 
 /*
@@ -6,15 +7,15 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "mono:pixelsize=12:antialias=true:autohint=true";
+#if FONT2_PATCH
 /* Spare fonts */
 static char *font2[] = {
-	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true",
+	/*"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true",*/
 /*	"Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true", */
 };
-
+#endif
 
 static int borderpx = 2;
-
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -87,7 +88,6 @@ static unsigned int blinktimeout = 800;
  * thickness of underline and bar cursors
  */
 static unsigned int cursorthickness = 2;
-
 
 /*
  * 1: render most of the lines/blocks characters without using the font for
@@ -207,9 +207,11 @@ static unsigned int defaultattr = 11;
  */
 ResourcePref resources[] = {
 		{ "font",         STRING,  &font },
+		#if FONT2_PATCH
 		{ "fontalt0",     STRING,  &font2[0] },
 		{ "fontalt1",     STRING,  &font2[1] },
 		{ "fontalt2",     STRING,  &font2[2] },
+		#endif
 		{ "color0",       STRING,  &colorname[0] },
 		{ "color1",       STRING,  &colorname[1] },
 		{ "color2",       STRING,  &colorname[2] },
@@ -571,7 +573,6 @@ static char ascii_printable[] =
 	" !\"#$%&'()*+,-./0123456789:;<=>?"
 	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
 	"`abcdefghijklmnopqrstuvwxyz{|}~";
-
 
 /**
  * Undercurl style. Set UNDERCURL_STYLE to one of the available styles.

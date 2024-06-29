@@ -251,7 +251,9 @@ zoomabs(const Arg *arg)
 
 	xunloadfonts();
 	xloadfonts(usedfont, arg->f);
+	#if FONT2_PATCH
 	xloadsparefonts();
+	#endif
 
 	/* delete old pixmaps so that xfinishdraw() can create new scaled ones */
 	for (im = term.images, i = 0; i < 2; i++, im = term.images_alt) {
@@ -1175,8 +1177,10 @@ xinit(int cols, int rows)
 	usedfont = (opt_font == NULL)? font : opt_font;
 	xloadfonts(usedfont, 0);
 
+	#if FONT2_PATCH
 	/* spare fonts */
 	xloadsparefonts();
+	#endif
 
 	/* colors */
 	xw.cmap = XCreateColormap(xw.dpy, parent, xw.vis, None);

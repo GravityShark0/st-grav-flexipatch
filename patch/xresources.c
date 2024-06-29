@@ -65,7 +65,9 @@ reload_config(int sig)
 	/* nearly like zoomabs() */
 	xunloadfonts();
 	xloadfonts(font, 0); /* font <- config_init() */
+	#if FONT2_PATCH
 	xloadsparefonts();
+	#endif
 	cresize(0, 0);
 	redraw();
 	xhints();
