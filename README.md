@@ -132,6 +132,16 @@ go read theme files or something, go copy and make a new one, you can figure it 
 
 Thanks to [bakkeby](https://github.com/bakkeby/st-flexipatch) and to [suckless](https://st.suckless.org/)
 
+### also if undercurl and colored not appearing in tmux do this
+
+```
+# get the latest terminfo
+curl -LO https://invisible-island.net/datafiles/current/terminfo.src.gz && gunzip terminfo.src.gz
+tic -xe tmux,tmux-256color terminfo.src
+# or run as root if you want to apply  to all users
+# sudo tic -xe tmux,tmux-256color terminfo.src
+```
+
 # original README
 
 ```
